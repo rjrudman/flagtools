@@ -25,7 +25,7 @@ if (!isSEsite || typeof StackExchange === "undefined" || !StackExchange.options.
    return;
 }
 
-function with_jquery(f) 
+function with_jquery(f)
 {
   var script = document.createElement("script");
   script.type = "text/javascript";
@@ -48,13 +48,13 @@ function initStyles()
 
    var flagStyles = document.createElement("style");
    flagStyles.textContent = `
-   #postflag-bar 
-   { 
-      display: none; 
+   #postflag-bar
+   {
+      display: none;
       background-color: rgba( 239,240,241, 0.75);
       opacity: 1;
    }
-   
+
    .flagToC
    {
       list-style-type: none;
@@ -63,7 +63,7 @@ function initStyles()
       margin-left: 40px;
       margin-right: 40px;
    }
-   
+
    .flagToC>li
    {
       padding: 4px;
@@ -74,11 +74,11 @@ function initStyles()
       border-radius: 4px;
       background-color: #fff;
    }
-   
-   .flagToC>li ul 
+
+   .flagToC>li ul
    {
       margin: 0px;
-      padding: 0px;      
+      padding: 0px;
    }
    .flagToC>li ul>li::before
    {
@@ -86,31 +86,31 @@ function initStyles()
       color: #6A7E7C;
       padding-right: 1em;
    }
-   .flagToC>li ul>li 
+   .flagToC>li ul>li
    {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
    }
-   
+
    .flagToC>li ul>li.inactive, .flagToC>li ul>li.inactive a
    {
       color: #6A7E7C;
    }
-      
-   .mod-tools.mod-tools-post, 
+
+   .mod-tools.mod-tools-post,
    .mod-tools .mod-tools-comment > :first-child
    {
       border-left: 8px solid #8D8D8D;
    }
-      
-   .mod-tools.mod-tools-post.active-flag, 
+
+   .mod-tools.mod-tools-post.active-flag,
    .mod-tools .mod-tools-comment.active-flag > :first-child
    {
       border-left: 8px solid #DB5D5D;
    }
 
-   .mod-tools.mod-tools-post 
+   .mod-tools.mod-tools-post
    {
       grid-column: 1 / span 2;
       padding: 10px 10px 10px 30px;
@@ -118,7 +118,7 @@ function initStyles()
       background-color: #EFF0F1;
    }
 
-   .mod-tools ul.flags li 
+   .mod-tools ul.flags li
    {
       margin:5px;
       padding: 5px;
@@ -127,17 +127,17 @@ function initStyles()
       list-style:none;
    }
 
-   
+
    .mod-tools ul.flags .flag-dismiss, .comment .comment-actions .flag-dismiss
    {
       visibility: hidden;
    }
-   
+
    .mod-tools ul.flags:hover .flag-dismiss, .comment:hover .comment-actions .flag-dismiss
    {
       visibility: visible;
    }
-   
+
    .comment .comment-actions .flag-dismiss
    {
       grid-column: 1 / span 2;
@@ -145,20 +145,20 @@ function initStyles()
       text-align: center;
    }
 
-   .mod-tools ul.flags .flag-info 
+   .mod-tools ul.flags .flag-info
    {
       /* white-space: nowrap; */
    }
 
-   /**/   
-   
+   /**/
+
    /* in which I mangle the site's flexbox styles to work for a purpose they were never intended to serve.
         this is almost certainly a bad idea, but hopefully easier than chasing site styling and beats 9 bold blue buttons in 18 sq.in.
          pretty unlikely a designer will ever see this, so I should be safe
    */
-   .dismiss-flags-popup 
-   { 
-      padding: 16px 0; 
+   .dismiss-flags-popup
+   {
+      padding: 16px 0;
       display: none;
    }
    .dismiss-flags-popup form
@@ -173,12 +173,12 @@ function initStyles()
    {
       text-align: left;
    }
-   
+
    .dismiss-flag-popup { display:none; }
-   
-   
+
+
    /**/
-   
+
    .mod-tools ul.flags .flag-info .flag-creation-user
    {
       white-space: nowrap;
@@ -213,14 +213,14 @@ function initStyles()
    }
 
    /*
-     Put comment delete link in consistent place, use words not symbols 
+     Put comment delete link in consistent place, use words not symbols
    */
-   
+
    .comment, .comment .flags
    {
       clear: both;
    }
-   
+
    .comment .comment-delete.delete-tag
    {
       background: none;
@@ -229,9 +229,9 @@ function initStyles()
       line-height: 20px;
       margin: 0;
       padding: 0;
-      float: right;      
+      float: right;
    }
-   
+
    .comment .comment-delete.delete-tag::after
    {
       content: "delete";
@@ -239,7 +239,7 @@ function initStyles()
 
    @supports (display: grid) and (not (display: contents) )
    {
-      ul.comments-list .active-flag .comment-actions 
+      ul.comments-list .active-flag .comment-actions
       {
          width: 54px;
       }
@@ -321,7 +321,7 @@ function initTools()
       formatDate: function(date)
       {
          if ( !date.getTime() ) return "(??)";
-         
+
          // mostly stolen from SE.com
          var delta = (((new Date()).getTime() - date.getTime()) / 1000);
 
@@ -352,13 +352,13 @@ function initTools()
          return date.toLocaleString(undefined, {month: "short", timeZone: "UTC"})
             + ' ' + date.toLocaleString(undefined, {day: "2-digit", timeZone: "UTC"})
             + ( delta > 31536000 ? ' \'' + date.toLocaleString(undefined, {year: "2-digit", timeZone: "UTC"}) : '')
-            + ' at' 
+            + ' at'
             + ' ' + date.toLocaleString(undefined, {minute: "2-digit", hour: "2-digit", hour12: false, timeZone: "UTC"});
       },
-      
+
       formatISODate: function(date)
       {
-         return date.toJSON().replace(/\.\d+Z/, 'Z');        
+         return date.toJSON().replace(/\.\d+Z/, 'Z');
       },
 
       dismissAllCommentFlags: function(commentId, flagIds)
@@ -388,7 +388,7 @@ function initTools()
       {
          return $.post('/admin/posts/' + postId + '/move-comments-to-chat', {fkey:StackExchange.options.user.fkey});
       },
-      
+
       makeWait: function(msecs)
       {
          return function()
@@ -399,7 +399,7 @@ function initTools()
             return result.promise();
          }
       },
-      
+
       flagHelpfulUI: function(uiParent)
       {
          var result = $.Deferred();
@@ -419,13 +419,13 @@ function initTools()
                 </form>
             </div>
          `);
-         
+
          uiParent.find(".dismiss-flags-popup").remove();
          helpfulForm
             .appendTo(uiParent)
             .slideDown()
             .find("button,input").first().focus();
-            
+
          helpfulForm.find("input[type=text]").charCounter({min: 0, max: 200, target: helpfulForm.find(".text-counter")});
 
          helpfulForm.find(".mark-flag-helpful").click(function(ev)
@@ -434,10 +434,10 @@ function initTools()
             helpfulForm.remove();
             result.resolve({helpful: true, declineId: 0, comment: helpfulForm.find("input[type=text]").val()});
          });
-         
+
          return result.promise();
       },
-      
+
       flagDeclineUI: function(uiParent)
       {
          var result = $.Deferred();
@@ -453,44 +453,44 @@ function initTools()
                        <button class="btn-outlined mark-flag-declined" value="other" type="submit" disabled>decline</button>
                      </div>
                   </div>
-                  <span class="text-counter cool">enter at least 10 characters of righteous indignation</span>         
+                  <span class="text-counter cool">enter at least 10 characters of righteous indignation</span>
                </form>
             </div>
          `);
-           
+
          var reasons = {
             technical: {
-               id: 1, 
+               id: 1,
                prompt: "flags should not be used to indicate technical inaccuracies, or an altogether wrong answer",
-               title: "use when the post does not violate the standards of the site, but is simply misleading or inaccurate" 
+               title: "use when the post does not violate the standards of the site, but is simply misleading or inaccurate"
             },
             noevidence: {
-               id: 2, 
+               id: 2,
                prompt: "a moderator reviewed your flag, but found no evidence to support it",
-               title: "use when you were unable to find any evidence that the problem described by the flag actually occurred" 
+               title: "use when you were unable to find any evidence that the problem described by the flag actually occurred"
             },
             nomods: {
-               id: 3, 
+               id: 3,
                prompt: "flags should only be used to make moderators aware of content that requires their intervention",
-               title: "use when the problem described could be corrected by the flagger, passers-by, the passage of time, or being less pedantic" 
+               title: "use when the problem described could be corrected by the flagger, passers-by, the passage of time, or being less pedantic"
             },
             stdflags: {
-               id: 4, 
+               id: 4,
                prompt: "using standard flags helps us prioritize problems and resolve them faster...",
-               title: "Using standard flags helps us prioritize problems and resolve them faster. Please familiarize yourself with the list of standard flags: see What is Flagging?" 
+               title: "Using standard flags helps us prioritize problems and resolve them faster. Please familiarize yourself with the list of standard flags: see What is Flagging?"
             }
          };
-           
+
          var lastDecline = localStorage["flaaaaags.last-decline"];
          if ( lastDecline )
          {
             reasons["lastEntered"] = {
-               id: 9999, 
+               id: 9999,
                prompt: lastDecline,
-               title: "this is the last custom reason you used to decline a flag" 
+               title: "this is the last custom reason you used to decline a flag"
             };
          }
-         
+
          for (let reason in reasons)
          {
             $('<button class="btn-outlined g-col -btn mark-flag-declined" type="button"></button>')
@@ -498,25 +498,25 @@ function initTools()
                .text(reasons[reason].prompt)
                .insertAfter(declineForm.find("form>label,form>button:last").last());
          }
-         
+
          uiParent.find(".dismiss-flags-popup").remove();
          declineForm
             .appendTo(uiParent)
             .slideDown()
             .find("button,input").first().focus();
-         
+
          var customDeclineField = declineForm.find("input[type=text]")
             .on("input", function()
             {
                var text = customDeclineField.val();
                declineForm.find(".mark-flag-declined[value=other]").prop("disabled", text.length < 10);
             })
-            .charCounter({min: 10, max: 200, target: declineForm.find(".text-counter")})         
+            .charCounter({min: 10, max: 200, target: declineForm.find(".text-counter")})
 
          declineForm.find(".mark-flag-declined").click(function(ev)
          {
             ev.preventDefault();
-            
+
             var declineReason = reasons[this.value] ? reasons[this.value].id : 0;
             var declineText = "";
             if ( declineReason == 9999 )
@@ -529,22 +529,22 @@ function initTools()
                declineText = customDeclineField.val();
                localStorage["flaaaaags.last-decline"] = declineText;
             }
-            
+
             declineForm.remove();
             result.resolve({helpful: false, declineId: declineReason, comment: declineText});
          });
-         
+
          return result.promise();
       },
-      
-      
+
+
       flagDismissUI: function(uiParent)
       {
          var result = $.Deferred();
          var dismissTools = $(`
             <div class="dismiss-flag-popup">
-               <button class="flag-dismiss-helpful" type="button" title="mark any pending flags as helpful">Helpful&hellip;</button> 
-               <button class="flag-dismiss-decline" type="button" title="mark any pending flags as declined">Decline&hellip;</button>         
+               <button class="flag-dismiss-helpful" type="button" title="mark any pending flags as helpful">Helpful&hellip;</button>
+               <button class="flag-dismiss-decline" type="button" title="mark any pending flags as declined">Decline&hellip;</button>
             </div>
          `);
 
@@ -553,39 +553,39 @@ function initTools()
             .appendTo(uiParent)
             .slideDown()
             .find("button,input").first().focus();
-         
+
          dismissTools.find("button").click(function()
          {
             var btn = $(this);
-            var choice = btn.is(".flag-dismiss-helpful") 
+            var choice = btn.is(".flag-dismiss-helpful")
                ? FlagFilter.tools.flagHelpfulUI(btn.parent())
                : FlagFilter.tools.flagDeclineUI(btn.parent());
-            
+
             choice.then(function(dismissal)
             {
                dismissTools.remove();
                result.resolve(dismissal);
             });
          });
-         
+
          return result.promise();
       },
-      
+
       predictMigrationDest: function(flagText)
       {
          return loadMigrationSites()
             .then(function(sites)
             {
                var ret = {baseHostAddress: '', name: ''};
-               
+
                if ( !/belongs on|moved? to|migrat|better fit/.test(flagText) )
                   return ret;
-               
+
                sites.forEach(function(site)
                {
                   var baseHost = site.site_url.replace(/^https?:\/\//, '');
                   if ( baseHost == window.location.host ) return;
-                  
+
                   if ( (RegExp(baseHost.replace('.stackexchange.com', ''), 'i').test(flagText)
                      || RegExp(site.name.replace(' ', '\\s?'), 'i').test(flagText))
                      && ret.baseHostAddress.length < baseHost.length )
@@ -622,7 +622,7 @@ function initTools()
                   return sites;
                });
          }
-      }      
+      }
 
    };
 }
@@ -630,17 +630,17 @@ function initTools()
 function initQuestionPage()
 {
    var loaded = $.Deferred();
-   
+
    var flagCache = {};
    var waffleFlags = GetFlagInfoFromWaffleBar();
    // give up on the waffle bar if it's listing all flags as handled for a given post - load full flag info.
    waffleFlags.filter(pf => pf.dirty).forEach( pf => RefreshFlagsForPost(pf.postId) );
    RenderToCInWaffleBar();
-      
+
    // depending on when this gets injected, these *may* already be loaded
    if ( $(".post-issue-display").length )
       loaded.resolve();
-   
+
    loaded.then(function()
    {
       initFlags();
@@ -691,8 +691,8 @@ function initQuestionPage()
             var btn = $(this);
             var post = btn.parents(".question, .answer");
             var postId = post.data("questionid") || post.data("answerid");
-            
-            var choice = btn.is(".flag-dismiss-all-helpful") 
+
+            var choice = btn.is(".flag-dismiss-all-helpful")
                ? FlagFilter.tools.flagHelpfulUI(btn.parent())
                : FlagFilter.tools.flagDeclineUI(btn.parent());
 
@@ -700,9 +700,9 @@ function initQuestionPage()
             {
                FlagFilter.tools.dismissAllFlags(postId, dismissal.helpful, dismissal.declineId, dismissal.comment)
                   .done(function()
-                  { 
-                     post.find('tr.mod-tools').slideUp(); 
-                     RefreshFlagsForPost(postId).then( () => post.find('tr.mod-tools').sideDown('fast') ); 
+                  {
+                     post.find('tr.mod-tools').slideUp();
+                     RefreshFlagsForPost(postId).then( () => post.find('tr.mod-tools').sideDown('fast') );
                   });
             });
          })
@@ -712,14 +712,14 @@ function initQuestionPage()
          {
             var holder = $(this).parent();
             var postId = $(this).data('postid');
-            
+
             RefreshFlagsForPost(postId, true)
                .then(function() {
                   holder.find('a.show-all-flags').hide();
                });
          });
    });
-   
+
    $(document)
       .ajaxSuccess(function(event, XMLHttpRequest, ajaxOptions)
       {
@@ -746,9 +746,9 @@ function initQuestionPage()
             setTimeout(() => RefreshFlagsForPost(postId), 1);
          }
       });
-   
+
    return loaded.promise();
-      
+
    function RefreshFlagsForPost(postId, expandComments)
    {
       var postContainer = $(".answer[data-answerid='"+postId+"'],.question[data-questionid='"+postId+"']")
@@ -801,12 +801,12 @@ function initQuestionPage()
       var inactiveCount = 0;
       for (let flag of postFlags.flags)
       {
-         if (flag.active) 
+         if (flag.active)
             activeCount += flag.flaggers.length;
          else
             inactiveCount += flag.flaggers.length;
 
-         if ( (flag.description === "spam" || flag.description === "rude or abusive") 
+         if ( (flag.description === "spam" || flag.description === "rude or abusive")
             && !flag.active
             && !tools.find(".flag-dispute-spam").length )
          {
@@ -816,13 +816,13 @@ function initQuestionPage()
             {
                if ( !confirm("This will undelete the post, remove any penalties against the author, and dispute ALL spam / rude / abusive flags ever raised on it. Are you sure?") )
                   return;
-               
+
                $.post("/admin/posts/" + postFlags.postId + "/clear-offensive-spam-flags", {fkey: StackExchange.options.user.fkey})
-                  .then(() => location.reload(), 
+                  .then(() => location.reload(),
                            function(err) { console.log(err); alert("something went wrong") });
             });
          }
-         
+
          FlagFilter.tools.predictMigrationDest(flag.description)
             .done(function(site)
             {
@@ -840,31 +840,31 @@ function initQuestionPage()
                   })
                   .appendTo(modActions);
             })
-         
+
 
          let flagItem = RenderFlagItem(flag);
          flagContainer.append(flagItem);
       }
-      
+
       tools.toggleClass("active-flag", !!activeCount);
 
       if (activeCount > 0)
       {
          modActions.prepend(`
-         <button class="flag-dismiss-all-helpful" type="button" title="mark any pending flags as helpful">Helpful&hellip;</button> 
+         <button class="flag-dismiss-all-helpful" type="button" title="mark any pending flags as helpful">Helpful&hellip;</button>
          <button class="flag-dismiss-all-decline" type="button" title="mark any pending flags as declined">Decline&hellip;</button>
 
 <!-- <input class="flag-delete-with-comment" type="button" value="delete with comment&hellip;" title="deletes this post with a comment the owner will see, as well as marking all flags as helpful"> -->
 `);
       }
- 
+
       var totalFlags = tools.data("totalflags");
       var commentFlags = postFlags.commentFlags.reduce((acc, f) => acc + f.flaggers.length, 0);
       // this... really just hacks around incomplete information in the waffle bar
       postFlags.assumeInactiveCommentFlagCount = totalFlags - (activeCount+inactiveCount) - commentFlags;
-      
+
       if (postFlags.flags.length)
-      { 
+      {
          let flagSummary = [];
          if (activeCount > 0) flagSummary.push(activeCount + " active post flags");
          if (inactiveCount) flagSummary.push(inactiveCount + " resolved post flags");
@@ -879,7 +879,7 @@ function initQuestionPage()
       }
       else
          tools.hide();
-      
+
       if (postFlags.commentFlags.length && forceCommentVisibility)
       {
          let issues = postContainer.find(".post-issue-display"),
@@ -899,7 +899,7 @@ function initQuestionPage()
       {
          ShowCommentFlags(postFlags.postId);
       }
-      
+
       StackExchange.realtime.updateRelativeDates();
    }
 
@@ -916,7 +916,7 @@ function initQuestionPage()
          commentModToolsContainer.remove();
          return;
       }
-      
+
       if ( !commentModToolsContainer.length)
       {
          commentModToolsContainer = $(`<li class="comment mod-tools-comment">
@@ -929,7 +929,7 @@ function initQuestionPage()
             .addClass("mod-tools")
             .find(">ul.comments-list").prepend(commentModToolsContainer);
       }
-      
+
       commentContainer
          .removeClass("dno")
          .find(".comment").removeClass("active-flag").end()
@@ -946,20 +946,20 @@ function initQuestionPage()
             container = $('<div><ul class="flags"></ul></div>')
             .appendTo(comment.find(".comment-text"))
             .find(".flags");
-         
+
          comment.addClass("mod-tools-comment");
 
-         if (flag.active) 
+         if (flag.active)
          {
             activeCount += flag.flaggers.length;
             comment.addClass("active-flag");
          }
          else
             inactiveCount += flag.flaggers.length;
-         
+
          if ( !comment.length )
             continue;
-         
+
          flagsShown += flag.flaggers.length;
          let flagItem = RenderFlagItem(flag);
          let flagDismiss = flagItem.find(".flag-dismiss").remove();
@@ -970,21 +970,21 @@ function initQuestionPage()
                .removeClass("delete-tag")
                .appendTo(comment.find(".comment-actions"));
       }
-      
+
       commentModToolsContainer.toggleClass("active-flag", !!activeCount);
 
       var totalFlags = tools.data("totalflags");
       var flagSummary = [];
-      if (activeCount > 0) 
+      if (activeCount > 0)
          flagSummary.push(`<a class='show-all-flags' data-postid='${postFlags.postId}' title='load complete flag details'>${activeCount} active comment flags</a>`);
-      
+
       inactiveCount = inactiveCount || postFlags.assumeInactiveCommentFlagCount;
       if (inactiveCount)
          flagSummary.push(`${inactiveCount} resolved comment flags${postFlags.assumeInactiveCommentFlagCount ? '*' : ''}`);
-         
+
       if ( flagsShown < (inactiveCount + activeCount) )
          flagSummary.push(`(${flagsShown} shown; load all comments to view the rest)`);
-      
+
       commentContainer.find("h3.comment-flag-summary")
          .html(flagSummary.join("; "));
    }
@@ -1021,40 +1021,40 @@ function initQuestionPage()
          for (let user of flag.flaggers)
          {
             if ( !user ) continue;
-            
-            var userLink = user.name 
+
+            var userLink = user.name
                ? $(`<a href="/users/${user.userId}" class="flag-creation-user comment-user"></a>`)
                   .text(user.name)
                   .wrap('<div></div>').parent()
                   .html()
                : '';
-            var flagDate = user.flagCreationDate.getTime() 
+            var flagDate = user.flagCreationDate.getTime()
                ? `<span class="flag-creation-date comment-date" dir="ltr"><span title="${FlagFilter.tools.formatISODate(user.flagCreationDate)}" class="relativetime-clean">${FlagFilter.tools.formatDate(user.flagCreationDate)}</span></span>`
                : '';
-               
+
             flaggerNames.push( userLink + ' ' + flagDate );
          }
-         
+
          flagItem.find(".flaggers").append(flaggerNames.join(", "));
       }
       return flagItem;
    }
-   
+
    function RenderToCInWaffleBar()
    {
       var flagToC = $("<ul class='flagToC'>");
-      for (let postId in flagCache) 
+      for (let postId in flagCache)
       {
          let post = $(".answer[data-answerid='"+postId+"'],.question[data-questionid='"+postId+"']"),
             postType = post.is(".answer") ? "answer" : "question",
             userLink = post.find(".user-details a[href^='/users/']:last,.user-details #history-"+postId),
             attribution = (userLink.is('#history-'+postId) ? '(wiki)' : "by " + userLink.text()),
-            url = postType == 'question' ? '#question' : "#" + postId; 
+            url = postType == 'question' ? '#question' : "#" + postId;
          if ( !post.length ) // handle flags spanning multiple pages of answers
          {
             url = '/a/' + postId;
             postType = "answer";
-            attribution = "on another page";            
+            attribution = "on another page";
          }
          let flagSummaries = SummarizeFlags(flagCache[postId], 3).map(function(summary)
          {
@@ -1074,7 +1074,7 @@ function initQuestionPage()
             .text(postType + " " + attribution)
             .append($("<ul>").append(flagSummaries))
          );
-         
+
          flagToC.append(entry);
       }
       $('#postflag-bar .flag-wrapper, #postflag-bar .flagToC').remove();
@@ -1101,18 +1101,18 @@ function initQuestionPage()
          return ret;
       }
    }
-      
+
    function LoadAllFlags(postId)
-   {      
+   {
       return LoadTimeline().then(ParseTimeline).then( af => flagCache[postId] = af );
-   
+
       function LoadTimeline()
       {
          return fetch("/admin/posts/timeline/" + postId, {method: "GET", credentials: "include"})
             .then( resp => resp.text() )
             .then( respText => new DOMParser().parseFromString(respText, "text/html") );
       }
-      
+
       function ParseTimeline(dom)
       {
          var ret = {
@@ -1120,7 +1120,7 @@ function initQuestionPage()
             flags: [],
             commentFlags: []
          };
-         
+
          var flagList = Array.from(dom.querySelectorAll(".post-timeline .event-rows tr[data-eventtype=flag]"));
          var flaggedCommentList = Array.from(dom.querySelectorAll(".post-timeline .event-rows tr[data-eventtype=comment] td.event-comment .toggle-comment-flags-container a[data-flag-ids]"));
          var commentMap = flaggedCommentList.reduce( function(acc, fc)
@@ -1134,6 +1134,9 @@ function initQuestionPage()
                return acc;
             }, {});
          var deletionList = Array.from(dom.querySelectorAll(".post-timeline .event-rows tr.deleted-event-details[data-eventid]"));
+
+         var promises = [];
+
          for (let row of flagList)
          {
             var id = +row.dataset.eventid;
@@ -1146,10 +1149,10 @@ function initQuestionPage()
             var deleted = deleteRow && deleteRow.querySelector(":scope>td.creation-date span.relativetime");
             var mod = deleteRow && deleteRow.querySelector(":scope>td>span.created-by>a");
             var result = deleteRow && deleteRow.querySelector(":scope>td.event-comment>span");
-            
+
             if ( !created || !eventType || !flagType ) continue;
-               
-            var flag = 
+
+            var flag =
             {
                flagIds: [id],
                description: (description && description.innerHTML.trim()) || (flagType && flagType.textContent.trim()) || "",
@@ -1168,13 +1171,33 @@ function initQuestionPage()
                   flagCreationDate: FlagFilter.tools.parseIsoDate(created.title)
                }]
             };
-               
+
             if (eventType.textContent.trim() === "comment flag")
             {
                var comment = commentMap[id];
-               if ( comment ) 
+               if ( comment )
                   flag.commentId = +comment.dataset.eventid;
-               
+
+               var commentAuthorId = $(comment).find('.comment-user').attr('href').match(/([\d]+)/)[0];
+
+               let flaggedCommentsUrl = "/admin/users/" + commentAuthorId + "/post-comments?state=flagged";
+               var prom = new Promise(function(resolve, reject) {
+                  $.ajax({
+                     'type': 'GET',
+                     'url': flaggedCommentsUrl
+                  })
+                  .done(function(data) {
+                     let comment = $(".text-row[data-id=" + flag.commentId + "]", data);
+                     let flagger = $(".deleted-info", comment).first().children("a").first();
+                     let flaggerUserId = flagger.attr('href').match(/([\d]+)/)[0];
+                     let flaggerName = flagger.text();
+
+                     flag.flaggers = [ { userId: flaggerUserId, name: flaggerName, flagCreationDate: FlagFilter.tools.parseIsoDate(created.title) } ]
+                     resolve();
+                  });
+               });
+
+               promises.push(prom)
                ret.commentFlags.push(flag);
             }
             else
@@ -1182,9 +1205,9 @@ function initQuestionPage()
                ret.flags.push(flag);
             }
          }
-         
+
          // consolidate flags with similar description and disposition
-         
+
          function consolidate(flagList)
          {
             return Object.values(flagList.reduce( function(acc, f)
@@ -1192,12 +1215,12 @@ function initQuestionPage()
                   var key = [f.commentId, f.description, f.active, f.resultDate, f.resultUser && f.resultUser.userId].join(":");
                   var composite = acc[key] || {
                      commentId: f.commentId,
-                     description: f.description, 
+                     description: f.description,
                      active: f.active,
                      result: f.result,
                      resultDate: f.resultDate,
                      resultUser: f.resultUser,
-                     flaggers: [], 
+                     flaggers: [],
                      flagIds: [] };
                   composite.flaggers.push.apply(composite.flaggers, f.flaggers.map(u => Object.assign({}, u)));
                   composite.flagIds.push.apply(composite.flagIds, f.flagIds);
@@ -1205,17 +1228,20 @@ function initQuestionPage()
                   return acc;
                }, {}) );
          }
-         
-         ret.flags = consolidate(ret.flags);
-         ret.commentFlags = consolidate(ret.commentFlags);
-         
-         return ret;
+
+         return new Promise(function(resolve, reject) {
+            Promise.all(promises).then(function() {
+               ret.flags = consolidate(ret.flags);
+               ret.commentFlags = consolidate(ret.commentFlags);
+               resolve(ret);
+            });
+         });
       }
    }
 
-   // 
+   //
    // this should be considered incomplete AT BEST
-   // The truth is, the flag bar intentionally omits some information (full list of flaggers, comment flaggers) 
+   // The truth is, the flag bar intentionally omits some information (full list of flaggers, comment flaggers)
    // and is incorrect in regard to some other information (showing active flags as inactive in cases where a flag has been handled)
    function GetFlagInfoFromWaffleBar()
    {
@@ -1283,5 +1309,5 @@ function initQuestionPage()
    }
 
 }
-   
+
 });
