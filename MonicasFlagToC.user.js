@@ -1082,8 +1082,7 @@ function initQuestionPage()
 
       $('#postflag-bar .flag-wrapper, #postflag-bar .flagToC').remove();
       $("<div class='flag-summary grid fl1 fd-column'>").insertAfter($('#postflag-bar .nav-button.prev, #postflag-bar .nav-button.close').first()).append(flagToC);
-      $('#postflag-bar').show();
-
+      
       function SummarizeFlags(flaggedPost, maxEntries)
       {
          var flags = flaggedPost.flags.concat(Object.values(flaggedPost.commentFlags.reduce(function(acc, cf)
