@@ -3,7 +3,7 @@
 // @description   Implement https://meta.stackexchange.com/questions/305984/suggestions-for-improving-the-moderator-flag-overlay-view/305987#305987
 // @author        Shog9
 // @namespace     https://github.com/Shog9/flagfilter/
-// @version       0.904
+// @version       0.904.1
 // @include       http*://stackoverflow.com/questions/*
 // @include       http*://*.stackoverflow.com/questions/*
 // @include       http*://dev.stackoverflow.com/questions/*
@@ -498,17 +498,7 @@ function initTools()
                title: "Using standard flags helps us prioritize problems and resolve them faster. Please familiarize yourself with the list of standard flags: see What is Flagging?" 
             }
          };
-           
-         var lastDecline = localStorage["flaaaaags.last-decline"];
-         if ( lastDecline )
-         {
-            reasons["lastEntered"] = {
-               id: 9999, 
-               prompt: lastDecline,
-               title: "this is the last custom reason you used to decline a flag" 
-            };
-         }
-         
+                   
          for (let reason in reasons)
          {
             $('<button class="btn-outlined g-col -btn mark-flag-declined" type="button"></button>')
